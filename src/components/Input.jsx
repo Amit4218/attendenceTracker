@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const Input = () => {
-
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submitted!!")
-  }
+    console.log("Submitted!!");
+  };
 
   return (
     <>
@@ -28,6 +27,6 @@ const Input = () => {
       </form>
     </>
   );
-}
+};
 
-export default Input
+export default Input;
