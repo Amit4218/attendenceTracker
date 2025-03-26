@@ -1,36 +1,45 @@
-import React, { useState } from 'react'
-import Popup from './Popup';
+import React, { useState } from "react";
+import Popup from "./Popup";
 
 const Input = () => {
-
-  const [total,setTotal] = useState("")
+  const [total, setTotal] = useState("");
   const handleChange = (e) => {
-    setTotal(e.target.value)
-  }
-
+    setTotal(e.target.value);
+  };
 
   const [attended, setAttended] = useState("");
   const handleChange2 = (e) => {
     setAttended(e.target.value);
-  };  
+  };
 
-
-   const [showPopup, setShowPopup] = useState(false);
-   const [attendancePercentage, setAttendancePercentage] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [attendancePercentage, setAttendancePercentage] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
-    if (total && attended) {
-      const percentage = ((Number(attended) / Number(total)) * 100).toFixed(2)
-      setAttendancePercentage(percentage)
-      setShowPopup(true)
+
+    const total_session = document.getElementById("total_session").value.trim();
+    const attented_session = document
+      .getElementById("attented_session")
+      .value.trim();
+
+    if (total_session === "" && attented_session === "") {
+      alert("All fields must be filled!");
+    } else if (total_session === "") {
+      alert("Total session is required!");
+    } else if (attented_session === "") {
+      alert("Attended session is required!");
     }
 
-    
+    if (total && attended) {
+      const percentage = ((Number(attended) / Number(total)) * 100).toFixed(2);
+      setAttendancePercentage(percentage);
+      setShowPopup(true);
+    }
+
     setAttended("");
     setTotal("");
-  }
+  };
 
   return (
     <>
@@ -41,38 +50,37 @@ const Input = () => {
             onSubmit={submitHandler}
           >
             {" "}
-            {/* Added padding and full width */}
             <div className="mb-4 w-full ">
               {" "}
-              {/* Flex container for alignment */}
               <h1 className="text-2xl mr-4 tracking-tighter">
                 Total Sessions:
               </h1>
               <input
                 onChange={handleChange}
                 value={total}
+                id="total_session"
                 name="total"
                 type="text"
-                className="border-purple-900 bg-purple-400 rounded-md h-10 w-full p-2 outline-0" // Full width for input
+                className="border-purple-900 bg-purple-400 rounded-md h-10 w-full p-2 outline-0"
                 placeholder="Enter the total number of sessions"
               />
             </div>
             <div className="mb-4 w-full ">
               {" "}
-              {/* Flex container for alignment */}
               <h1 className="text-2xl mr-4">Attended sessions:</h1>
               <input
                 onChange={handleChange2}
                 value={attended}
+                id="attented_session"
                 name="attended"
                 type="text"
-                className="border-purple-900 bg-purple-400 rounded-md h-10 w-full p-2 outline-0" // Full width for input
+                className="border-purple-900 bg-purple-400 rounded-md h-10 w-full p-2 outline-0"
                 placeholder="Sessions attended"
               />
             </div>
             <button
               type="submit"
-              className="text-white bg-purple-950 rounded-2xl w-60 mt-20 ml-64 h-96 hover:bg-purple-500 hover:text-black hover:border-purple-950 border-2 border-solid border-purple-400"
+              className="text-white bg-purple-950 rounded-2xl w-60 h-12 self-center hover:bg-purple-500 hover:text-black hover:border-purple-950 border-2 border-solid border-purple-400"
             >
               Submit
             </button>
@@ -91,4 +99,3 @@ const Input = () => {
 };
 
 export default Input;
-
