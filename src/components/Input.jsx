@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react'
 
 const Input = () => {
+
+  const [total,setTotal] = useState("")
+  const handleChange = (e) => {
+    setTotal(e.target.value)
+  }
+
+
+  const [attended, setAttended] = useState("");
+  const handleChange2 = (e) => {
+    setAttended(e.target.value);
+  };  
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submitted!!");
-  };
+    setAttended("")
+    setTotal("")
+  }
 
   return (
     <>
@@ -42,3 +55,4 @@ const Input = () => {
 };
 
 export default Input;
+
