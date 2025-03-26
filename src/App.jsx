@@ -8,7 +8,8 @@ const App = () => {
 
   return (
     <>
-      <Input/>
+      <Input />
+     
     </>
   )
 }
