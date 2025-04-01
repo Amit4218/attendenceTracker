@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Popup from "./Popup";
+import LogReview from "./LogReview";
 
 const Input = () => {
   const [total, setTotal] = useState("");
@@ -12,8 +13,15 @@ const Input = () => {
     setAttended(e.target.value);
   };
 
+    const [username, setUsername] = useState("");
+    const handleChange1 = (e) => {
+      setUsername(e.target.value);
+    };
+
   const [showPopup, setShowPopup] = useState(false);
   const [attendancePercentage, setAttendancePercentage] = useState(null);
+
+  const [isMoved, setIsMoved] = useState(false)
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,13 +46,13 @@ const Input = () => {
     }
 
     setAttended("");
-    setTotal("");
+    
   };
 
   return (
     <>
-      <div className="bg-linear-to-bl from-purple-500 to-purple-300 h-screen w-full flex justify-center items-center">
-        <div className="flex justify-center items-center bg-purple-600 rounded-3xl h-96 w-1/2 font-mono ml-64 mr-56">
+      <div className="bg-linear-to-bl from-purple-500 to-purple-300 h-screen w-full flex justify-center items-center ">
+        <div className="flex justify-center items-center bg-purple-600 rounded-3xl h-[60vh] w-[50vw] font-mono ml-64 mr-56">
           <form
             className="flex flex-col justify-center items-start h-full w-full p-8"
             onSubmit={submitHandler}
@@ -52,6 +60,16 @@ const Input = () => {
             {" "}
             <div className="mb-4 w-full ">
               {" "}
+              <h1 className="text-2xl mr-4 tracking-tighter">Student Name:</h1>
+              <input
+                onChange={handleChange1}
+                value={username}
+                id="username"
+                name="username"
+                type="text"
+                className="border-purple-900 bg-purple-400 mb-5 rounded-md h-10 w-full p-2 outline-0"
+                placeholder="Enter the total number of sessions"
+              />
               <h1 className="text-2xl mr-4 tracking-tighter">
                 Total Sessions:
               </h1>
@@ -86,14 +104,24 @@ const Input = () => {
             </button>
           </form>
         </div>
+        <div
+          className={` hover:cursor-cell hover:bg-transparent p-1 rounded-lg absolute top-5 ${
+            isMoved ? "right-50 " : "right-0"
+          }   ease-in-out duration-500 `}
+          onClick={() => {
+            setIsMoved(!isMoved);
+          }}
+        >
+          <h3>
+            Review Log <i class="ri-news-fill"></i>
+          </h3>
+        </div>
       </div>
 
       {showPopup && (
-        <Popup
-          attendence={attendancePercentage}
-          onClose={() => setShowPopup(false)}
-        />
+        <Popup attendence={attendancePercentage} username={username} />
       )}
+      <LogReview isMoved={ isMoved} />
     </>
   );
 };
