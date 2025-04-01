@@ -4,7 +4,7 @@ const LogReview = ({ isMoved }) => {
   return (
     <>
       <div
-        className={`  h-[95vh] overflow-scroll scroll-smooth py-10 w-[15vw] absolute top-15 ${
+        className={`  h-[95vh] overflow-scroll scroll-smooth  py-10 w-[15vw] absolute top-15 ${
           isMoved ? "right-0" : "right-[-20%]"
         } ease-in-out duration-700`}
       >
